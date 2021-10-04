@@ -34,7 +34,12 @@ def main():
 
     bin_host = host.get_bin_address()
     bin_mask = mask.get_bin_address()
-    print()
+
+    net_address = [bin(int(bin_host[i], 2) & int(bin_mask[i], 2))[2::].rjust(8, '0') for i in range(len(bin_host))]
+
+    print(bin_host)
+    print(bin_mask)
+    print(net_address)
 
 
 # Press the green button in the gutter to run the script.
