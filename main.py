@@ -21,6 +21,9 @@ class IpAddress:
         else:
             return [(str(octet)).rjust(3, '0') for octet in self.address]
 
+    def __invert__(self):  # перегружает отрицание на инверсию
+        return [''.join([str(int(not int(self.bin_address[octet][bit]))) for bit in range(8)]) for octet in range(4)]
+
 
 def main():
     host = '10.246.162.99'
@@ -31,8 +34,7 @@ def main():
 
     bin_host = host.get_bin_address()
     bin_mask = mask.get_bin_address()
-
-    net_address = [int(bin_host[i], 2) & int(bin_mask[i], 2) for i in range(len(bin_host))]
+    print()
 
 
 # Press the green button in the gutter to run the script.
