@@ -33,7 +33,6 @@ def main():
     bin_mask = mask.get_bin_address()
 
     net_address = [int(bin_host[i], 2) & int(bin_mask[i], 2) for i in range(len(bin_host))]
-    broadcast = []
 
 
 # Press the green button in the gutter to run the script.
