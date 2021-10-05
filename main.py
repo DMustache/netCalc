@@ -1,7 +1,8 @@
 # This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Press Shift+F10 to execute it or replace it with your code. Press
+# Double Shift to search everywhere for classes, files, tool windows,
+# actions, and settings.
 
 class IpAddress:
     def __init__(self, ip):
@@ -22,7 +23,9 @@ class IpAddress:
             return [(str(octet)).rjust(3, '0') for octet in self.address]
 
     def __invert__(self):  # перегружает отрицание на инверсию
-        return [''.join([str(int(not int(self.bin_address[octet][bit]))) for bit in range(8)]) for octet in range(4)]
+        return [''.join(
+            [str(int(not int(self.bin_address[octet][bit]))) for bit in
+             range(8)]) for octet in range(4)]
 
 
 def main():
@@ -34,12 +37,18 @@ def main():
 
     bin_host = host.get_bin_address()
     bin_mask = mask.get_bin_address()
+    not_mask = ~mask
 
-    net_address = [bin(int(bin_host[i], 2) & int(bin_mask[i], 2))[2::].rjust(8, '0') for i in range(len(bin_host))]
-
+    net_address = [
+        bin(int(bin_host[i], 2) & int(bin_mask[i], 2))[2::].rjust(8, '0')
+        for i in range(len(bin_host))]
+    broadcast = [
+        bin(int(not_mask[i], 2) | int(bin_host[i], 2))[2::].rjust(8, '0')
+        for i in range(len(bin_host))]
     print(bin_host)
     print(bin_mask)
     print(net_address)
+    print(broadcast)
 
 
 # Press the green button in the gutter to run the script.
